@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- TuneLab V1 插件（voice 类型）：云端歌声合成。
+       目标框架锁 net8.0（SDK ABI 下限）。只引用 TuneLab.Foundation 与 TuneLab.SDK——
+       它们是宿主共享的插件契约程序集，Private=false 表示不复制到输出、也不随包分发。
+       第三方私有依赖放包目录随包分发（本项目当前无）。
+       输出直接落 artifacts/package/，内容文件一并拷入，供 scripts/pack.sh 打成 .tlx。 -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>TuneLab.CloudVoice</AssemblyName>
+    <RootNamespace>TuneLab.CloudVoice</RootNamespace>
+    <Version>1.0.0</Version>
+    <OutputPath>$(MSBuildThisFileDirectory)..\..\artifacts\package\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>TuneLab.CloudVoice.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TuneLab\TuneLab.Foundation\TuneLab.Foundation.csproj" Private="false" />
+    <ProjectReference Include="..\..\TuneLab\TuneLab.SDK\TuneLab.SDK.csproj" Private="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="manifest.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Introduction.md" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Introduction.zh-CN.md" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="icon.svg" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

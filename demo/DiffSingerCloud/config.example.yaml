@@ -1,0 +1,43 @@
+# DiffSinger CloudVoice 服务端配置示例（复制成 config.yaml 后按需修改）
+# 命令行参数优先级高于本文件；所有 key 与 server/config.py 的 ServerConfig 字段同名。
+
+# ---- HTTP ----
+host: 127.0.0.1
+port: 18791
+# api_key: secret-token        # 设置后请求必须带 Authorization: Bearer secret-token
+log_level: INFO
+
+# ---- 推理后端: auto | cpu | cuda | mps ----
+# auto = 有 CUDA 用 CUDA，否则 CPU（Apple Silicon 实测 CoreML 常比 CPU 慢，不自动选 mps；
+#        要试 Apple GPU 请显式 backend: mps，CoreML 执行失败时自动回退 CPU）
+# mps  = Apple Silicon GPU（ONNX Runtime 的 CoreML ExecutionProvider，苹果平台没有原生 MPS EP）
+backend: auto
+device_id: 0                   # CUDA 设备号
+threads: 4                     # ONNX Runtime 线程数；0 = 默认
+max_cached_sessions: 12        # ONNX 会话缓存上限（按模型文件计）
+
+# ---- 声库 ----
+# 相对路径按本配置文件所在目录解析；默认扫描 demo/DiffSingerCloud/OpenUTAU/
+voice_dirs:
+  - OpenUTAU
+scan_depth: 3                  # 声库目录扫描深度
+language: auto                 # 默认歌词语言: auto | zh | ja | en
+pitch_mode: auto               # 默认音高来源: auto(有 dspitch 自动预测，回退画线) | tunelab(始终画线)
+                               # TuneLab 里还可用 part 属性 PitchMode 按片段覆盖
+
+# 内建声码器（如 nsf_hifigan）查找目录；不写时会自动探测 OpenUTAU Dependencies 等位置
+# vocoder_dirs:
+#   - OpenUTAU/Vocoders
+#   - $HOME/Library/OpenUtau/Dependencies
+
+# ---- DiffSinger 渲染（与 OpenUTAU 语义一致） ----
+depth: 1.0                     # 浅扩散深度；声库 use_variable_depth 时会被 max_depth 限制
+steps: 20                      # 扩散步数
+include_leading: true          # 响应音频向前保留首音节 leading 辅音（audioStart 可能早于 startTime）
+
+# ---- 协议 / 并发 ----
+max_concurrent: 1              # DiffSinger 推理吃内存，默认串行
+queue_timeout_seconds: 30
+max_request_bytes: 16777216
+max_block_seconds: 600
+max_notes: 512

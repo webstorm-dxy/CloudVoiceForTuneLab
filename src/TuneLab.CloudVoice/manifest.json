@@ -1,0 +1,21 @@
+{
+  "id": "io.github.daxingyi.tunelab.cloudvoice",
+  "name": "Cloud Voice（云端歌声合成）",
+  "version": "1.0.0",
+  "author": "daxingyi",
+  "description": "把 TuneLab 的音符（歌词 / 音高 / 参数曲线）发送到云端 HTTP(S) 歌声合成服务，取回音频、音素、音高与参数回显。内置离线 mock 声库，无网络也能跑通整条链路。",
+  "icon": "icon.svg",
+  "sdk-version": "1.1",
+  "type": "voice",
+  "engine": "CloudVoice",
+  "introduction": "Introduction.md",
+  "localizations": {
+    "zh-CN": {
+      "name": "Cloud Voice（云端歌声合成）",
+      "description": "把 TuneLab 的音符发送到云端 HTTP(S) 歌声合成服务，取回音频、音素、音高与参数回显。内置离线 mock 声库。",
+      "introduction": "Introduction.zh-CN.md"
+    }
+  },
+  "class": "TuneLab.CloudVoice.CloudVoiceEngine",
+  "assembly": "TuneLab.CloudVoice.dll"
+}

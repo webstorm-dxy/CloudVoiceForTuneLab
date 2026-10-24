@@ -1,0 +1,9 @@
+# 运行时依赖（Python 3.10+；本机验证使用 3.12）
+# macOS / Linux CPU: 下面的 onnxruntime 即可；CUDA 机器请改装 requirements-cuda.txt
+fastapi>=0.110
+uvicorn>=0.27
+pydantic>=2.5
+PyYAML>=6.0
+numpy>=1.26
+onnxruntime>=1.17
+pypinyin>=0.51

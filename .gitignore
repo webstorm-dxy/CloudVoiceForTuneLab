@@ -1,0 +1,59 @@
+# ===================== 上游源码（不进本仓库） =====================
+# TuneLab 上游源码由 scripts/update-tunelab.sh 按需克隆 / 更新
+/TuneLab/
+
+# ========================= 构建产物 / 缓存 =========================
+# scripts/build.sh、scripts/pack.sh 的输出，以及集成测试产物
+/artifacts/
+**/bin/
+**/obj/
+TestResults/
+
+# 本地验证沙盒（integration.sh / check-host-compat.sh 使用）
+/.sandbox/
+*.log
+*.tmp
+
+# ============================== demo ==============================
+# demo 只纳入 DiffSingerCloud 演示；OpenCyanCloud 演示不进仓库
+/demo/OpenCyanCloud/
+
+# DiffSingerCloud 演示：本地声库目录（OpenUTAU 格式声库 / 声码器 / 指向本机的软链）
+/demo/DiffSingerCloud/OpenUTAU/*
+!/demo/DiffSingerCloud/OpenUTAU/README.md
+!/demo/DiffSingerCloud/OpenUTAU/.gitignore
+
+# DiffSingerCloud 演示：虚拟环境 / 本地配置（可能含本机路径与 API key）/ 生成物
+.venv/
+/demo/DiffSingerCloud/config.yaml
+/demo/DiffSingerCloud/config.local.yaml
+/demo/DiffSingerCloud/.test-voicebank/
+/demo/DiffSingerCloud/.runtime/
+
+# ============================= Python =============================
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.coverage
+htmlcov/
+
+# =================== 本工作区本地缓存（dotnet / NuGet） ===================
+# 正常开发用系统缓存即可，这两个目录只是本机沙盒环境用的
+/.nuget/
+/.dotnet/
+
+# ======================== 本地密钥 / 环境变量 ========================
+.env
+.env.*
+!.env.example
+
+# ========================== 编辑器 / 系统 ==========================
+.vs/
+.idea/
+*.user
+*.suo
+.DS_Store
+Thumbs.db

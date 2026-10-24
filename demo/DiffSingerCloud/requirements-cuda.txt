@@ -1,0 +1,8 @@
+# CUDA（Linux / Windows NVIDIA）后端：用 onnxruntime-gpu 替换 onnxruntime
+fastapi>=0.110
+uvicorn>=0.27
+pydantic>=2.5
+PyYAML>=6.0
+numpy>=1.26
+onnxruntime-gpu>=1.17
+pypinyin>=0.51
